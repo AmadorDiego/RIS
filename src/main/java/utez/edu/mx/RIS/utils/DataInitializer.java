@@ -9,6 +9,8 @@ import utez.edu.mx.RIS.Radiologo.model.RadiologoRepository;
 import utez.edu.mx.RIS.rol.model.Rol;
 import utez.edu.mx.RIS.rol.model.RolRepository;
 
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
 @Configuration
@@ -45,13 +47,14 @@ public class DataInitializer {
                     private boolean status;
 
     */
-                    Usuario usuarioAdministrador = new Usuario();
+                    Radiologo usuarioAdministrador = new Radiologo();
                     usuarioAdministrador.setNombre("Diego Ricardo");
-                    usuarioAdministrador.setApellidos("Amador Casillas");
-                    usuarioAdministrador.setCorreoElectronico("20233tn077@utez.edu.mx");
+                    usuarioAdministrador.setCorreo("20233tn077@utez.edu.mx");
                     usuarioAdministrador.setTelefono("7772991476");
                     usuarioAdministrador.setContrasena(passwordEncoder.encode("20233tn077"));
-                    usuarioAdministrador.setToken(null);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+                    usuarioAdministrador.setHoraInicio(LocalTime.parse("11:49:02", formatter));
+                    usuarioAdministrador.setHoraFin(LocalTime.parse("11:49:02", formatter));
                     usuarioAdministrador.setStatus(true);
                     usuarioAdministrador.getRoles().add(rolAdministrador);
                     usuarioRepository.saveAndFlush(usuarioAdministrador);
@@ -59,7 +62,7 @@ public class DataInitializer {
 
                 optionalUsuario = usuarioRepository.findByCorreoElectronico("20233tn092@utez.edu.mx");
                 if (!optionalUsuario.isPresent()) {
-                    Usuario usuarioAdministrador = new Usuario();
+                    Radiologo usuarioAdministrador = new Radiologo();
                     usuarioAdministrador.setNombre("Viridiana");
                     usuarioAdministrador.setApellidos("Portilla Palestina");
                     usuarioAdministrador.setCorreoElectronico("20233tn092@utez.edu.mx");
