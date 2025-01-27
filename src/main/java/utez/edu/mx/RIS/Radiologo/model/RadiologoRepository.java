@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface RadiologoRepository extends JpaRepository<Radiologo, Long> {
     List<Radiologo> findAllByStatus(boolean status);
     Optional<Radiologo> findByCorreo(String correo);
+    Optional<Radiologo> findFirstByCorreoAndToken(String email,String code);
 }

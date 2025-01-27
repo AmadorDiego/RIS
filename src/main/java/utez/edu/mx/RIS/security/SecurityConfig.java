@@ -33,36 +33,16 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable()) // Forma moderna de deshabilitar CSRF
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // Configuración de CORS
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/usuarios/registrarse", "/usuarios/enviarEmail", "/usuarios/verificarToken").permitAll()
+                        .requestMatchers("/login", "/usuarios/registrarse", "/usuarios/verificarToken").permitAll()
                         .requestMatchers(
-                                "/usuarios/registrarUsuario",
                                 "/usuarios/consultar",
                                 "/usuarios/modificarUsuario",
-                                "/usuarios/cambiarStatus",
-                                "/categorias/**",
-                                "/productos/registrarProducto",
-                                "/productos/consultar",
-                                "/productos/modificarProducto",
-                                "/productos/cambiarStatus",
-                                "/ventas/consultarVentas",
-                                "/ventas/cambiarStatus"
-                        ).hasAuthority("ADMINISTRADOR")
+                                "/usuarios/cambiarStatus"
+                        ).hasAuthority("RADIOLOGO")
 
                         .requestMatchers(
-                                "/ventas/registrarVenta",
-                                "/ventas/modificarVenta",
-                                "/ventas/agregarProductos",
-                                "/ventas/eliminarProductos"
-                        ).hasAuthority("USUARIO")
-
-                        .requestMatchers(
-                                "/usuarios/consultarPefil",
-                                "/usuarios/modificarPerfil",
-                                "/productos/consultarProductosActivos",
-                                "/usuarios/modificarContrasena",
-                                "/ventas/consultar",
-                                "/ventas/consultarVentasActivas"
-                        ).hasAnyAuthority("ADMINISTRADOR", "USUARIO")
+                                "/usuarios/consultarRadiologos"
+                        ).hasAnyAuthority("RADIOLOGO", "USUARIO")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

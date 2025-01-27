@@ -57,8 +57,8 @@ public class RadiologoController {
 
 
         @PostMapping("/verificarToken")
-        public ResponseEntity<Object> verificarToken(@Validated({UsuarioDto.VerificarToken.class}) @RequestBody UsuarioDto usuarioDto){
-            return usuarioService.verificarToken(usuarioDto);
+        public ResponseEntity<Object> verificarToken(@Validated({RadiologoDto.VerificarToken.class}) @RequestBody RadiologoDto usuarioDto){
+            return radiologoService.verificarToken(usuarioDto);
         }
 
 }

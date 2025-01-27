@@ -19,7 +19,7 @@ public class Radiologo {
     private String nombre;
     @Column(name = "correo", columnDefinition = "VARCHAR(70)")
     private String correo;
-    @Column(name = "contrasena", columnDefinition = "VARCHAR(10)")
+    @Column(name = "contrasena", columnDefinition = "VARCHAR(255)")
     private String contrasena;
     @Column(name = "telefono", columnDefinition = "VARCHAR(10)")
     private String telefono;

@@ -20,134 +20,73 @@ public class DataInitializer {
     CommandLineRunner initDatabase(RadiologoRepository radiologoRepository, RolRepository rolRepository, PasswordEncoder passwordEncoder) {
         return args -> {
 
-            Optional<Rol> optionalRol = rolRepository.findByRol("ADMINISTRADOR");
+            Optional<Rol> optionalRol = rolRepository.findByRol("RADIOLOGO");
             if (!optionalRol.isPresent()) {
-                Rol rolAdministrador = new Rol("ADMINISTRADOR");
+                Rol rolAdministrador = new Rol("RADIOLOGO");
                 rolRepository.saveAndFlush(rolAdministrador);
+
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
 
                 Optional<Radiologo> optionalUsuario = radiologoRepository.findByCorreo("20233tn077@utez.edu.mx");
                 if (!optionalUsuario.isPresent()) {
-                    /*
-                    @Id
-                    @GeneratedValue(strategy = GenerationType.IDENTITY)
-                    private Long id;
-                    @Column(name = "nombre", columnDefinition = "VARCHAR(30)")
-                    private String nombre;
-                    @Column(name = "correo", columnDefinition = "VARCHAR(70)")
-                    private String correo;
-                    @Column(name = "contrasena", columnDefinition = "VARCHAR(10)")
-                    private String contrasena;
-                    @Column(name = "telefono", columnDefinition = "VARCHAR(10)")
-                    private String telefono;
-                    @Column(name = "horaInicio", columnDefinition = "TIME")
-                    private LocalTime horaInicio;
-                    @Column(name = "horaFin", columnDefinition = "TIME")
-                    private LocalTime horaFin;
-                    @Column(name = "status", columnDefinition = "BOOL DEFAULT TRUE")
-                    private boolean status;
-
-    */
                     Radiologo usuarioAdministrador = new Radiologo();
                     usuarioAdministrador.setNombre("Diego Ricardo");
                     usuarioAdministrador.setCorreo("20233tn077@utez.edu.mx");
                     usuarioAdministrador.setTelefono("7772991476");
                     usuarioAdministrador.setContrasena(passwordEncoder.encode("20233tn077"));
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
                     usuarioAdministrador.setHoraInicio(LocalTime.parse("11:49:02", formatter));
                     usuarioAdministrador.setHoraFin(LocalTime.parse("11:49:02", formatter));
                     usuarioAdministrador.setStatus(true);
                     usuarioAdministrador.getRoles().add(rolAdministrador);
-                    usuarioRepository.saveAndFlush(usuarioAdministrador);
+                    radiologoRepository.saveAndFlush(usuarioAdministrador);
                 }
 
-                optionalUsuario = usuarioRepository.findByCorreoElectronico("20233tn092@utez.edu.mx");
+                optionalUsuario = radiologoRepository.findByCorreo("20233tn092@utez.edu.mx");
                 if (!optionalUsuario.isPresent()) {
                     Radiologo usuarioAdministrador = new Radiologo();
                     usuarioAdministrador.setNombre("Viridiana");
-                    usuarioAdministrador.setApellidos("Portilla Palestina");
-                    usuarioAdministrador.setCorreoElectronico("20233tn092@utez.edu.mx");
+                    usuarioAdministrador.setCorreo("20233tn092@utez.edu.mx");
                     usuarioAdministrador.setTelefono("7773306808");
                     usuarioAdministrador.setContrasena(passwordEncoder.encode("20233tn092"));
-                    usuarioAdministrador.setToken(null);
+                    usuarioAdministrador.setHoraInicio(LocalTime.parse("11:49:02", formatter));
+                    usuarioAdministrador.setHoraFin(LocalTime.parse("11:49:02", formatter));
                     usuarioAdministrador.setStatus(true);
                     usuarioAdministrador.getRoles().add(rolAdministrador);
-                    usuarioRepository.saveAndFlush(usuarioAdministrador);
+                    radiologoRepository.saveAndFlush(usuarioAdministrador);
                 }
 
-                optionalUsuario = usuarioRepository.findByCorreoElectronico("20233tn099@utez.edu.mx");
+                optionalUsuario = radiologoRepository.findByCorreo("20233tn099@utez.edu.mx");
                 if (!optionalUsuario.isPresent()) {
-                    Usuario usuarioAdministrador = new Usuario();
+                    Radiologo usuarioAdministrador = new Radiologo();
                     usuarioAdministrador.setNombre("Fernanda Gabriela");
-                    usuarioAdministrador.setApellidos("García Segura");
-                    usuarioAdministrador.setCorreoElectronico("20233tn099@utez.edu.mx");
+                    usuarioAdministrador.setCorreo("20233tn099@utez.edu.mx");
                     usuarioAdministrador.setTelefono("7772273687");
                     usuarioAdministrador.setContrasena(passwordEncoder.encode("20233tn099"));
-                    usuarioAdministrador.setToken(null);
+                    usuarioAdministrador.setHoraInicio(LocalTime.parse("11:49:02", formatter));
+                    usuarioAdministrador.setHoraFin(LocalTime.parse("11:49:02", formatter));
                     usuarioAdministrador.setStatus(true);
                     usuarioAdministrador.getRoles().add(rolAdministrador);
-                    usuarioRepository.saveAndFlush(usuarioAdministrador);
-                }
-
-                optionalUsuario = usuarioRepository.findByCorreoElectronico("20233tn068@utez.edu.mx");
-                if (!optionalUsuario.isPresent()) {
-                    Usuario usuarioAdministrador = new Usuario();
-                    usuarioAdministrador.setNombre("Elias Manuel");
-                    usuarioAdministrador.setApellidos("Marquez Bailon");
-                    usuarioAdministrador.setCorreoElectronico("20233tn068@utez.edu.mx");
-                    usuarioAdministrador.setTelefono("7772167599");
-                    usuarioAdministrador.setContrasena(passwordEncoder.encode("20233tn068"));
-                    usuarioAdministrador.setToken(null);
-                    usuarioAdministrador.setStatus(true);
-                    usuarioAdministrador.getRoles().add(rolAdministrador);
-                    usuarioRepository.saveAndFlush(usuarioAdministrador);
-                }
-
-                optionalUsuario = usuarioRepository.findByCorreoElectronico("20223tn028@utez.edu.mx");
-                if (!optionalUsuario.isPresent()) {
-                    Usuario usuarioAdministrador = new Usuario();
-                    usuarioAdministrador.setNombre("Emiliano Santiago");
-                    usuarioAdministrador.setApellidos("Rodriguez Castañeda");
-                    usuarioAdministrador.setCorreoElectronico("20223tn028@utez.edu.mx");
-                    usuarioAdministrador.setTelefono("7771952315");
-                    usuarioAdministrador.setContrasena(passwordEncoder.encode("20223tn028"));
-                    usuarioAdministrador.setToken(null);
-                    usuarioAdministrador.setStatus(true);
-                    usuarioAdministrador.getRoles().add(rolAdministrador);
-                    usuarioRepository.saveAndFlush(usuarioAdministrador);
-                }
-
-                optionalUsuario = usuarioRepository.findByCorreoElectronico("20233tn074@utez.edu.mx");
-                if (!optionalUsuario.isPresent()) {
-                    Usuario usuarioAdministrador = new Usuario();
-                    usuarioAdministrador.setNombre("Andrea Alejandrina");
-                    usuarioAdministrador.setApellidos("Ramirez Ocampo");
-                    usuarioAdministrador.setCorreoElectronico("20233tn074@utez.edu.mx");
-                    usuarioAdministrador.setTelefono("7774289237");
-                    usuarioAdministrador.setContrasena(passwordEncoder.encode("20233tn074"));
-                    usuarioAdministrador.setToken(null);
-                    usuarioAdministrador.setStatus(true);
-                    usuarioAdministrador.getRoles().add(rolAdministrador);
-                    usuarioRepository.saveAndFlush(usuarioAdministrador);
+                    radiologoRepository.saveAndFlush(usuarioAdministrador);
                 }
             }
 
             optionalRol = rolRepository.findByRol("USUARIO");
             if (!optionalRol.isPresent()) {
-                Rol rolAdministrador = new Rol("USUARIO");
-                rolRepository.saveAndFlush(rolAdministrador);
+                Rol rolUsuario = new Rol("USUARIO");
+                rolRepository.saveAndFlush(rolUsuario);
 
-                Optional<Usuario> optionalUsuario = usuarioRepository.findByCorreoElectronico("usuario@utez.edu.mx");
+                Optional<Radiologo> optionalUsuario = radiologoRepository.findByCorreo("usuario@utez.edu.mx");
                 if (!optionalUsuario.isPresent()) {
-                    Usuario usuarioAdministrador = new Usuario();
+                    Radiologo usuarioAdministrador = new Radiologo();
                     usuarioAdministrador.setNombre("Nombre usuario");
-                    usuarioAdministrador.setApellidos("Apellidos usuario");
-                    usuarioAdministrador.setCorreoElectronico("usuario@utez.edu.mx");
+                    usuarioAdministrador.setCorreo("usuario@utez.edu.mx");
                     usuarioAdministrador.setTelefono("0123456789");
                     usuarioAdministrador.setContrasena(passwordEncoder.encode("passwordUsuario"));
-                    usuarioAdministrador.setToken(null);
+                    usuarioAdministrador.setHoraInicio(null);
+                    usuarioAdministrador.setHoraFin(null);
                     usuarioAdministrador.setStatus(true);
-                    usuarioAdministrador.getRoles().add(rolAdministrador);
-                    usuarioRepository.saveAndFlush(usuarioAdministrador);
+                    usuarioAdministrador.getRoles().add(rolUsuario);
+                    radiologoRepository.saveAndFlush(usuarioAdministrador);
                 }
             }
         };
