@@ -29,6 +29,8 @@ public class Radiologo {
     private LocalTime horaFin;
     @Column(name = "status", columnDefinition = "BOOL DEFAULT TRUE")
     private boolean status;
+    @Column(name = "token", columnDefinition = "VARCHAR(10)")
+    private String token;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -125,5 +127,21 @@ public class Radiologo {
 
     public void setHoraFin(LocalTime horaFin) {
         this.horaFin = horaFin;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    public Set<Rol> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Rol> roles) {
+        this.roles = roles;
     }
 }
