@@ -4,10 +4,10 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import utez.edu.mx.GDV.Usuarios.Model.Usuario;
-import utez.edu.mx.GDV.Usuarios.Model.UsuarioRepository;
-import utez.edu.mx.GDV.role.model.Rol;
-import utez.edu.mx.GDV.role.model.RolRepository;
+import utez.edu.mx.RIS.Radiologo.model.Radiologo;
+import utez.edu.mx.RIS.Radiologo.model.RadiologoRepository;
+import utez.edu.mx.RIS.rol.model.Rol;
+import utez.edu.mx.RIS.rol.model.RolRepository;
 
 import java.util.Optional;
 
@@ -15,7 +15,7 @@ import java.util.Optional;
 public class DataInitializer {
 
     @Bean
-    CommandLineRunner initDatabase(UsuarioRepository usuarioRepository, RolRepository rolRepository, PasswordEncoder passwordEncoder) {
+    CommandLineRunner initDatabase(RadiologoRepository radiologoRepository, RolRepository rolRepository, PasswordEncoder passwordEncoder) {
         return args -> {
 
             Optional<Rol> optionalRol = rolRepository.findByRol("ADMINISTRADOR");
@@ -23,8 +23,28 @@ public class DataInitializer {
                 Rol rolAdministrador = new Rol("ADMINISTRADOR");
                 rolRepository.saveAndFlush(rolAdministrador);
 
-                Optional<Usuario> optionalUsuario = usuarioRepository.findByCorreoElectronico("20233tn077@utez.edu.mx");
+                Optional<Radiologo> optionalUsuario = radiologoRepository.findByCorreo("20233tn077@utez.edu.mx");
                 if (!optionalUsuario.isPresent()) {
+                    /*
+            @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "nombre", columnDefinition = "VARCHAR(30)")
+    private String nombre;
+    @Column(name = "correo", columnDefinition = "VARCHAR(70)")
+    private String correo;
+    @Column(name = "contrasena", columnDefinition = "VARCHAR(10)")
+    private String contrasena;
+    @Column(name = "telefono", columnDefinition = "VARCHAR(10)")
+    private String telefono;
+    @Column(name = "horaInicio", columnDefinition = "TIME")
+    private LocalTime horaInicio;
+    @Column(name = "horaFin", columnDefinition = "TIME")
+    private LocalTime horaFin;
+    @Column(name = "status", columnDefinition = "BOOL DEFAULT TRUE")
+    private boolean status;
+
+    */
                     Usuario usuarioAdministrador = new Usuario();
                     usuarioAdministrador.setNombre("Diego Ricardo");
                     usuarioAdministrador.setApellidos("Amador Casillas");

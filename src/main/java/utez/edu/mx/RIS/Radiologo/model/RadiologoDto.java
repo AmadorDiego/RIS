@@ -20,6 +20,10 @@ public class RadiologoDto {
     private LocalTime horaInicio;
     @NotNull(groups = {Registrar.class, Modificar.class}, message = "Es necesario la hora de salida")
     private LocalTime horaFin;
+    @NotBlank(groups = {Registrar.class, Modificar.class}, message = "Es necesario el rol")
+    private String rol;
+    @NotBlank(groups = {VerificarToken.class}, message = "Es necesario el token")
+    private String token;
 
     public RadiologoDto() {
     }
@@ -80,8 +84,20 @@ public class RadiologoDto {
     public void setHoraFin(LocalTime horaFin) {
         this.horaFin = horaFin;
     }
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getToken() { return token; }
+
+    public void setToken(String token) { this.token = token; }
 
     public interface Registrar{}
     public interface Modificar{}
     public interface CambiarStatus{}
+    public interface VerificarToken{}
 }

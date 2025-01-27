@@ -10,12 +10,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import utez.edu.mx.GDV.Usuarios.Model.Usuario;
-import utez.edu.mx.GDV.Usuarios.Model.UsuarioRepository;
-import utez.edu.mx.GDV.security.JwtUtil;
-import utez.edu.mx.GDV.security.UserDetailsServiceImpl;
-import utez.edu.mx.GDV.utils.Message;
-import utez.edu.mx.GDV.utils.TypesResponse;
+import utez.edu.mx.RIS.Radiologo.model.Radiologo;
+import utez.edu.mx.RIS.Radiologo.model.RadiologoRepository;
+import utez.edu.mx.RIS.security.JwtUtil;
+import utez.edu.mx.RIS.security.UserDetailsServiceImpl;
+import utez.edu.mx.RIS.utils.Message;
+import utez.edu.mx.RIS.utils.TypesResponse;
 
 @RestController
 public class AuthController {
@@ -23,14 +23,14 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtUtil jwtUtil;
-    private final UsuarioRepository usuarioRepository;
+    private final RadiologoRepository radiologoRepository;
 
     @Autowired
-    public AuthController(AuthenticationManager authenticationManager, UserDetailsServiceImpl userDetailsService, JwtUtil jwtUtil, UsuarioRepository usuarioRepository) {
+    public AuthController(AuthenticationManager authenticationManager, UserDetailsServiceImpl userDetailsService, JwtUtil jwtUtil, RadiologoRepository radiologoRepository) {
         this.authenticationManager = authenticationManager;
         this.userDetailsService = userDetailsService;
         this.jwtUtil = jwtUtil;
-        this.usuarioRepository = usuarioRepository;
+        this.radiologoRepository = radiologoRepository;
     }
 
     @PostMapping("/login")
@@ -45,11 +45,11 @@ public class AuthController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authRequest.getCorreoElectronico());
         final String jwt = jwtUtil.generateToken(userDetails);
 
-        Usuario usuario = usuarioRepository.findByCorreoElectronico(authRequest.getCorreoElectronico())
+        Radiologo usuario = radiologoRepository.findByCorreo(authRequest.getCorreoElectronico())
                 .orElseThrow(() -> new Exception("Usuario no encontrado"));
 
         long expirationTime = jwtUtil.getExpirationTime();
-        AuthResponse authResponse = new AuthResponse(jwt, usuario.getId(), usuario.getCorreoElectronico(), expirationTime);
+        AuthResponse authResponse = new AuthResponse(jwt, usuario.getId(), usuario.getCorreo(), expirationTime);
 
         return new ResponseEntity<>(new Message(authResponse,"Sesión iniciada correctamente. Bienvenido", TypesResponse.SUCCESS), HttpStatus.OK);
     }

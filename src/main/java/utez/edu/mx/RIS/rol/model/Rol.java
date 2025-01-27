@@ -2,6 +2,7 @@ package utez.edu.mx.RIS.rol.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import utez.edu.mx.RIS.Radiologo.model.Radiologo;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -19,7 +20,7 @@ public class Rol {
 
     @JsonIgnore
     @ManyToMany(mappedBy = "roles")
-    private Set<> usuarios = new HashSet<>();
+    private Set<Radiologo> usuarios = new HashSet<>();
 
     public Rol() {}
 
@@ -43,11 +44,11 @@ public class Rol {
         this.rol = rol;
     }
 
-    public Set<Usuario> getUsuarios() {
+    public Set<Radiologo> getUsuarios() {
         return usuarios;
     }
 
-    public void setUsuarios(Set<Usuario> usuarios) {
+    public void setUsuarios(Set<Radiologo> usuarios) {
         this.usuarios = usuarios;
     }
 }

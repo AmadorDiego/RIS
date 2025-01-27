@@ -2,9 +2,12 @@ package utez.edu.mx.RIS.Radiologo.model;
 
 import ch.qos.logback.core.util.Loader;
 import jakarta.persistence.*;
+import utez.edu.mx.RIS.rol.model.Rol;
 
 
 import java.time.LocalTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name= "radiologos")
@@ -27,7 +30,15 @@ public class Radiologo {
     @Column(name = "status", columnDefinition = "BOOL DEFAULT TRUE")
     private boolean status;
 
-    public Radiologo(Long id, String nombre, String correo, String contrasena, String telefono, LocalTime horaInicio, LocalTime horaFin, boolean status) {
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "usuario_tiene_rol",
+            joinColumns = @JoinColumn(name = "usuario_id"),
+            inverseJoinColumns = @JoinColumn(name = "rol_id")
+    )
+    private Set<Rol> roles = new HashSet<>();
+
+    public Radiologo(Long id, String nombre, String correo, String contrasena, String telefono, LocalTime horaInicio, LocalTime horaFin, boolean status, Set<Rol> roles) {
         this.id = id;
         this.nombre = nombre;
         this.correo = correo;
@@ -36,6 +47,7 @@ public class Radiologo {
         this.horaInicio = horaInicio;
         this.horaFin = horaFin;
         this.status = status;
+        this.roles = roles;
     }
 
     public Radiologo() {
