@@ -26,23 +26,23 @@ public class DataInitializer {
                 Optional<Radiologo> optionalUsuario = radiologoRepository.findByCorreo("20233tn077@utez.edu.mx");
                 if (!optionalUsuario.isPresent()) {
                     /*
-            @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "nombre", columnDefinition = "VARCHAR(30)")
-    private String nombre;
-    @Column(name = "correo", columnDefinition = "VARCHAR(70)")
-    private String correo;
-    @Column(name = "contrasena", columnDefinition = "VARCHAR(10)")
-    private String contrasena;
-    @Column(name = "telefono", columnDefinition = "VARCHAR(10)")
-    private String telefono;
-    @Column(name = "horaInicio", columnDefinition = "TIME")
-    private LocalTime horaInicio;
-    @Column(name = "horaFin", columnDefinition = "TIME")
-    private LocalTime horaFin;
-    @Column(name = "status", columnDefinition = "BOOL DEFAULT TRUE")
-    private boolean status;
+                    @Id
+                    @GeneratedValue(strategy = GenerationType.IDENTITY)
+                    private Long id;
+                    @Column(name = "nombre", columnDefinition = "VARCHAR(30)")
+                    private String nombre;
+                    @Column(name = "correo", columnDefinition = "VARCHAR(70)")
+                    private String correo;
+                    @Column(name = "contrasena", columnDefinition = "VARCHAR(10)")
+                    private String contrasena;
+                    @Column(name = "telefono", columnDefinition = "VARCHAR(10)")
+                    private String telefono;
+                    @Column(name = "horaInicio", columnDefinition = "TIME")
+                    private LocalTime horaInicio;
+                    @Column(name = "horaFin", columnDefinition = "TIME")
+                    private LocalTime horaFin;
+                    @Column(name = "status", columnDefinition = "BOOL DEFAULT TRUE")
+                    private boolean status;
 
     */
                     Usuario usuarioAdministrador = new Usuario();
