@@ -42,7 +42,7 @@ public class SecurityConfig {
 
                         .requestMatchers(
                                 "/usuarios/consultarRadiologos"
-                        ).hasAnyAuthority("RADIOLOG", "USUARIO")
+                        ).hasAnyAuthority("RADIOLOGO", "USUARIO")
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
